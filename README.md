@@ -25,9 +25,9 @@ import matplotlib.pyplot as plt
 
 import falkon
 from testing_utils import snr_score
+
+
 X, Y = datasets.make_circles(n_samples=1000, shuffle=False, noise=0.1, factor=.9)
-
-
 #--- prepare data ---- #
 X_train, X_test, Y_train, Y_test = model_selection.train_test_split(
     X, Y, test_size=0.5, shuffle=True)
