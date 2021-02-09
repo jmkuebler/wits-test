@@ -1,6 +1,6 @@
 # An Optimal Witness Function for Two-Sample Testing
 The provided implementation builts on two other code-bases:
-1. We provide an implementation to estimate KFDA witnesses. To do so, we extend the FALKON code ([https://github.com/FalkonML/falkon](https://github.com/FalkonML/falkon)) 
+1. We provide an implementation to estimate KFDA witnesses. To do so, we extend the FALKON (Rudi et al. (2017), Meanti et al. (2020)) code ([https://github.com/FalkonML/falkon](https://github.com/FalkonML/falkon)) 
 with a method for KFDA.
    
 2. We provide benchmark experiments for deep optimized kernels. Therefore we reuse the experiments of Liu et al.(2020) 
@@ -53,3 +53,8 @@ p = 1 - norm.cdf(tau)
 
 print("p value = ", p)
 ```
+
+## References
+1. F. Liu, W. Xu, J. Lu, G. Zhang, A. Gretton, and D. J. Sutherland.   *Learning  deep  kernels  for  non-parametric  two-sample tests*. ICML, 2020.
+2. A. Rudi, L. Carratino, and L. Rosasco. Falkon: *An optimal large scale kernel method*. NeurIPS, 2017.
+3. G. Meanti, L. Carratino, L. Rosasco, and A. Rudi. *Kernel methods through the roof:  Handling billions of points efficiently*. NeurIPS, 2020.
