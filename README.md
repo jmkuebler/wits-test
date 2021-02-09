@@ -1,7 +1,9 @@
 # An Optimal Witness Function for Two-Sample Testing
+All the utility functions we implemented are in the file `testing_utils.py`.
+
 The provided implementation builts on two other code-bases:
 1. We provide an implementation to estimate KFDA witnesses. To do so, we extend the FALKON (Rudi et al. (2017), Meanti et al. (2020)) code ([https://github.com/FalkonML/falkon](https://github.com/FalkonML/falkon)) 
-with a method for KFDA.
+with a method for KFDA - implemented via the new class `FdaFalkon`.
    
 2. We provide benchmark experiments for deep optimized kernels. Therefore we reuse the experiments of Liu et al.(2020) 
    ([https://github.com/fengliu90/DK-for-TST](https://github.com/fengliu90/DK-for-TST)) and extend them with the proposed Witness approaches.
