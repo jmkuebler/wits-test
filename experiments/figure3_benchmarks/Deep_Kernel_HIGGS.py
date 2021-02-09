@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+------- This file is based on the implementation provided by Liu et al. 2020.
+Some commments are from the original authors, and not from the paper "An Optimal Witness for Two-Sample Testing" ------
+
 Created on Dec 21 14:57:02 2019
 @author: Learning Deep Kernels for Two-sample Test
 @Implementation of MMD-D in our paper on Higgs dataset
@@ -43,33 +46,29 @@ class ModelLatentF(torch.nn.Module):
         fealant = self.latent(input)
         return fealant
 
-# parameters to generate data
-parser.add_argument('--n', type=int, default=200)
-args = parser.parse_args()
 # Setup seeds
 np.random.seed(1102)
 torch.manual_seed(1102)
 torch.cuda.manual_seed(1102)
 torch.backends.cudnn.deterministic = True
-is_cuda = True
+is_cuda = True # Set True when running on GPU, False to run on CPU
 # Setup for experiments
 dtype = torch.float
-device = torch.device("cuda:0")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 N_per = 100 # permutation times
 alpha = 0.05 # test threshold
 d = 4 # dimension of data
-n = args.n # number of samples in one set
-print('n: '+str(n)+' d: '+str(d))
 N_epoch = 1000 # number of training epochs
+
 x_in = d # number of neurons in the input layer, i.e., dimension of data
 H = 20 # number of neurons in the hidden layer
 x_out = 20 # number of neurons in the output layer
 learning_rate = 0.00005
 learning_ratea = 0.001
 learning_rate_C2ST = 0.001
-K = 100 # number of trails
-N = 10 # number of test sets
-N_f = 10.0 # number of test sets (float)
+K = 10 # number of trails
+N = 100 # number of test sets
+N_f = 100.0 # number of test sets (float)
 
 # Load data
 data = pickle.load(open('./HIGGS_TST.pckl', 'rb'))
@@ -92,7 +91,7 @@ s_OPT = np.zeros([K])
 s0_OPT = np.zeros([K])
 Results = np.zeros([2,K])
 
-n_list = [1000, 2000, 3000, 5000, 8000, 10000]
+n_list = [1000, 2000, 3000, 5000]
 for n in n_list:
     Results = np.zeros([2,K])
     pbar = tqdm(range(K))
@@ -192,6 +191,7 @@ for n in n_list:
             T_u[k] = threshold_u
             M_u[k] = mmd_value_u
 
+            # ------ OPT-MMD-Witness --- #
             # run the witness based two-sample test
             Kx1x2, Kx1y2, Ky1x2, Ky1y2 = kernelmatrix(Fea=model_u(Stest), len_s=N2, Fea_org=Stest, Fea_tr=model_u(S),
                                                       len_s_tr=N1, Fea_org_tr=S, sigma=sigma, sigma0=sigma0_u,
@@ -206,4 +206,4 @@ for n in n_list:
         # Results[1, kk] = H_wit.sum() / N_f
         # print("Test Power of MMD-D (K times): ", Results[0])
         # print("Average Test Power of MMD-D: ", Results[0].sum() / (kk + 1))
-    np.save('./data/Results_100times10_HIGGS_n' + str(n) + '_H1_MMD-D', Results)
+    np.save('./Results_100times10_HIGGS_n' + str(n) + '_H1_MMD-D', Results)

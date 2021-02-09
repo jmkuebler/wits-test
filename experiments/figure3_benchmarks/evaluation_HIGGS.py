@@ -24,7 +24,7 @@ import numpy as np
 ns = [1000, 2000, 3000, 5000]
 
 #plot kfda witness this
-npzfile = np.load('kfda_higgs_M500_100iterations.npy')
+npzfile = np.load('higgs_kfda_witness.npy')
 power_kfda_witness = npzfile['arr_1']
 plt.plot(ns, power_kfda_witness, label='kfda-witness', ls='solid', color='tab:red', marker='x', linewidth=linewidth)
 

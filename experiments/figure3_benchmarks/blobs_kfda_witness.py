@@ -125,12 +125,5 @@ for n in n_list:
         pbar.set_description("n= %.0f" % n_per_class + " witness power: %.4f" % np.mean(results_witness))
     power_witness.append(np.mean(results_witness))
 
-plt.plot(n_list, power_witness, label='kfda-witness')
-plt.legend()
-plt.xlabel("Samplesize")
-
-
-# plt.show()
-plt.savefig('type-II.pdf')
-with open('type-II.npy', 'wb') as f:
+with open('blobs_kfda_witness.npy', 'wb') as f:
     np.savez(f, n, power_witness)

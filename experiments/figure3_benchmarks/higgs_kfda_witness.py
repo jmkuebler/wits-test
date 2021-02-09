@@ -35,7 +35,8 @@ np.random.seed(0)
 for n in n_list:
     results_witness = []
     warnings.filterwarnings("ignore")
-    pbar = tqdm(range(100))
+    # pbar = tqdm(range(100))
+    pbar = tqdm(range(1))
     for i in pbar:
         ## ---- Draw Data ---- ###
         # Generate Higgs (P,Q)
@@ -89,5 +90,5 @@ for n in n_list:
         pbar.set_description("n= %.0f" % n + " witness power: %.4f" % np.mean(results_witness))
     power_witness.append(np.mean(results_witness))
 
-    with open('higgs_kfda_witness.npy', 'wb') as f:
-        np.savez(f, n, power_witness)
+with open('higgs_kfda_witness.npy', 'wb') as f:
+    np.savez(f, n, power_witness)

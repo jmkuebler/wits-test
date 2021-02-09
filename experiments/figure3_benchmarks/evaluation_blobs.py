@@ -22,7 +22,7 @@ linewidth = 2
 sample_per_mode = np.array([10,20,30,40,50])
 
 #plot kfda witness this
-npzfile = np.load('kfda_deep_blobs_alternative_100iterations.npy')
+npzfile = np.load('blobs_kfda_witness.npy')
 power_kfda_witness = npzfile['arr_1']
 plt.plot(sample_per_mode*9, power_kfda_witness[:5], label='kfda-witness', ls='solid', color='tab:red', marker='x')
 

@@ -1,5 +1,5 @@
 ## Instructive Experiments (Figure 2 + Figure 6)
-To reproduce Figure 2, please run the experiment files in the subdirectories, e.q., `python fig2_left.py`. This will create
+To reproduce Figure 2, please run the experiment files in the subdirectories, e.g., `python fig2_left.py`. This will create
 a file with the results. After successfull completion, the results 
 can be evaluated running `python plot.py` in the respective directory.
 

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+------- This file is based on the implementation provided by Liu et al. 2020.
+Some commments are from the original authors, and not from the paper "An Optimal Witness for Two-Sample Testing" ------
+
 Created on Dec 21 14:57:02 2019
 @author: Learning Deep Kernels for Two-sample Test
 @Implementation of baselines in our paper on Higgs dataset
@@ -55,7 +58,7 @@ torch.backends.cudnn.deterministic = True
 is_cuda = True
 # Setup for experiments
 dtype = torch.float
-device = torch.device("cuda:0")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 N_per = 100 # permutation times
 alpha = 0.05 # test threshold
 d = 4 # dimension of data
@@ -91,7 +94,7 @@ J_star_u = np.zeros([N_epoch])
 J_star_adp = np.zeros([N_epoch])
 
 
-n_list = [1000, 2000, 3000, 5000, 8000, 10000]
+n_list = [1000, 2000, 3000, 5000]
 for n in n_list:
     Results = np.zeros([5, K])
     pbar = tqdm(range(K))
@@ -214,10 +217,6 @@ for n in n_list:
             M_adaptive[k] = mmd_value_adaptive
             H_ME[k] = h_ME
             H_SCF[k] = h_SCF
-
-        # print("Test Power of MMD-O: ", H_adaptive.sum() / N_f, "Test Power of C2ST-L: ", H_C2ST_L.sum() / N_f,
-        #       "Test Power of C2ST-S: ", H_C2ST_S.sum() / N_f, "Test Power of ME:", H_ME.sum() / N_f,
-        #       "Test Power of SCF: ", H_SCF.sum() / N_f)
         Results[0, kk] = H_adaptive.sum() / N_f
         Results[1, kk] = H_C2ST_L.sum() / N_f
         Results[2, kk] = H_C2ST_S.sum() / N_f
@@ -226,11 +225,4 @@ for n in n_list:
         pbar.set_description(('n = %.0f, ' %n + 'MMD-O: %.4f, ' % (Results[0].sum()/(kk+1))) + "C2ST_L: %.4f" %(Results[1].sum()/(kk+1)) +
                              "C2ST_S: %.4f" %(Results[2].sum()/(kk+1)) + "ME: %.4f" %(Results[3].sum()/(kk+1)) +
                              "SCF: %.4f" %(Results[4].sum()/(kk+1)))
-
-        # print("Test Power of Baselines (K times): ")
-        # print(Results)
-        # print("Average Test Power of Baselines (K times): ")
-        # print("MMD-O: ", (Results.sum(1) / (kk + 1))[0], "C2ST-L: ", (Results.sum(1) / (kk + 1))[1],
-        #       "C2ST-S: ", (Results.sum(1) / (kk + 1))[2], "ME:", (Results.sum(1) / (kk + 1))[3],
-        #       "SCF: ", (Results.sum(1) / (kk + 1))[4])
     np.save('./Results_HIGGS_' + str(n) + '_H1_Baselines', Results)
