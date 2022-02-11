@@ -1,4 +1,4 @@
-# An Optimal Witness Function for Two-Sample Testing
+# A Witness Two-Sample Test
 All the utility functions we implemented are in the file `testing_utils.py`.
 
 The provided implementation builts on two other code-bases:
