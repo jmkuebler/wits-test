@@ -9,6 +9,7 @@ with a method for KFDA - implemented via the new class `FdaFalkon`. We discuss t
    ([https://github.com/fengliu90/DK-for-TST](https://github.com/fengliu90/DK-for-TST)) and extend them with the proposed Witness approaches.
 
 ## Installing
+The installation is tested for Python version 3.6. 
 0. create virtualenvironment
 1. `pip install -r requirements.txt`
 2. `cd kfda_falkon`
