@@ -10,6 +10,7 @@ with a method for KFDA - implemented via the new class `FdaFalkon`. We discuss t
 
 ## Installing
 The installation is tested for Python version 3.6. 
+
 0. create virtualenvironment
 1. `pip install -r requirements.txt`
 2. `cd kfda_falkon`
