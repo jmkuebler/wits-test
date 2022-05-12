@@ -18,6 +18,7 @@ The installation is tested for Python version 3.6.
 
 ## Reproduce Experimental Results
 Navigate to the experiment directory and follow the instructions in the respective `Readme.md`.
+UPDATE: The sample size (per distribution) used for the HIGGS experiments, is actually twice the samplesize reported in the paper. For example the reported samplesize 1000 means that 1000 each from P and Q where used each for training and testing. So altogether 2000 examples from each distribution (this corresponds to Liu et al) and overall 4000 examples are handled totally.
 
 ## Minimal Working Example `mwe.py` - Estimating p-values
 ```python
